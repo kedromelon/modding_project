@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-name: QuickGrids 2
-=======
-name: ProGrids 2
->>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
-version: 2.0b1
-revision: 1037
-date: 07-18-2013
