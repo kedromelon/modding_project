@@ -10,7 +10,6 @@ public class controller : MonoBehaviour {
 	public float jumpSpeed = 100f;
 	public float fallSpeed = 6f;
 	bool grounded = false;
-	bool dash = true;
 	
 	// Use this for initialization
 	void Start () {
@@ -42,7 +41,6 @@ public class controller : MonoBehaviour {
             grounded = false;
         }
 		
-		
 	}
 	
 	void FixedUpdate() {
@@ -57,5 +55,7 @@ public class controller : MonoBehaviour {
 		}else{
 			rigidbody.AddForce( Physics.gravity * fallSpeed, ForceMode.Acceleration );
 		}
+		
 	}
+
 }
