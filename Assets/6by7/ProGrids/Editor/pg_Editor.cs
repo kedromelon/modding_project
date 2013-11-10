@@ -2,6 +2,10 @@
  *	@sixbyseven studio
  *	7/8/2013
  */
+<<<<<<< HEAD
+=======
+#define PRO
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
  
 using UnityEngine;
 using UnityEditor;
@@ -20,8 +24,18 @@ public class pg_Editor : EditorWindow
 
 	private bool snapEnabled = true;
 	private SnapUnit snapUnit = SnapUnit.Meter;
+<<<<<<< HEAD
 	private float snapValue = .25f;						// if you change this value, a puppy dies.  you murderer.
 	private float t_snapValue = .25f;					
+=======
+	#if PRO
+	private float snapValue = 1f;						// the actual snap value, taking into account unit size
+	private float t_snapValue = 1f;						// what the user sees
+	#else
+	private float snapValue = .25f;						// if you change this value, a puppy dies.  you murderer.
+	private float t_snapValue = .25f;					
+	#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 	private bool drawGrid = true;
 	private bool drawAngles = false;
 	private float angleValue = 45f;
@@ -31,9 +45,26 @@ public class pg_Editor : EditorWindow
 
 	const string PROGRIDS_UPGRADE_URL = "http://u3d.as/content/six-by-seven-studio/pro-grids/3ov";
 
+<<<<<<< HEAD
 	const int WINDOW_HEIGHT = 290;
 
 	const float METER = 1f;
+=======
+	#if PRO
+	const int WINDOW_HEIGHT = 270;
+	#else
+	const int WINDOW_HEIGHT = 290;
+	#endif
+
+	const float METER = 1f;
+	#if PRO
+	const float CENTIMETER = .001f;
+	const float INCH = 0.0253999862840074f;
+	const float FOOT = 0.3048f;
+	const float YARD = 1.09361f;
+	const float PARSEC = 5f;
+	#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 
 	const int MAX_LINES = 150;							// the maximum amount of lines to display on screen in either direction
 
@@ -48,11 +79,25 @@ public class pg_Editor : EditorWindow
 
 
 	private GUIContent gc_SnapToGrid = new GUIContent(gui_SnapToGrid, "Snaps all selected objects to grid.");
+<<<<<<< HEAD
+=======
+	#if PRO
+	private GUIContent gc_SnapEnabled = new GUIContent(gui_SnapOff, "Toggles snapping on or off.");
+	private GUIContent gc_SnapUnit = new GUIContent("", "The unit of measurement to draw guides to.");
+	private GUIContent gc_DrawGrid = new GUIContent(gui_VisOn, "Toggles drawing of guide lines on or off.  Note that object snapping is not affected by this setting.");
+	private GUIContent gc_DrawAngles = new GUIContent(gui_AnglesOn, "If on, ProGrids will draw angled line guides.  Angle is settable in degrees.");
+	private GUIContent gc_AngleValue = new GUIContent("", "The degree at which angle guides will be drawn.");
+	#else
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 	private GUIContent gc_SnapEnabled = new GUIContent(gui_SnapToGrid, "Toggles snapping on or off.");
 	private GUIContent gc_SnapUnit = new GUIContent("", "The unit of measurement to draw guides to.  Pro only feature - QuickGrids is limited to Meter increments.");
 	private GUIContent gc_DrawGrid = new GUIContent(gui_VisOn, "Toggles drawing of guide lines on or off.  Note that object snapping is not affected by this setting.");
 	private GUIContent gc_DrawAngles = new GUIContent(gui_AnglesOn, "If on, ProGrids will draw angled line guides.  Angle is settable in degrees.  Pro only feature.");
 	private GUIContent gc_AngleValue = new GUIContent("", "The degree at which angle guides will be drawn. Pro only feature.");
+<<<<<<< HEAD
+=======
+	#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 
 #endregion
 
@@ -92,6 +137,16 @@ public class pg_Editor : EditorWindow
 
 	public enum SnapUnit {
 		Meter,
+<<<<<<< HEAD
+=======
+		#if PRO
+		Centimeter,
+		Inch,
+		Foot,
+		Yard,
+		Parsec
+		#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 	}
 
 	public float SnapUnitValue(SnapUnit su) {
@@ -99,6 +154,21 @@ public class pg_Editor : EditorWindow
 		{
 			case SnapUnit.Meter:
 				return METER;
+<<<<<<< HEAD
+=======
+			#if PRO
+			case SnapUnit.Centimeter:
+				return CENTIMETER;
+			case SnapUnit.Inch:
+				return INCH;
+			case SnapUnit.Foot:
+				return FOOT;
+			case SnapUnit.Yard:
+				return YARD;
+			case SnapUnit.Parsec:
+				return PARSEC;
+			#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 			default:
 				return METER;
 		}
@@ -217,6 +287,12 @@ public class pg_Editor : EditorWindow
 		if(GUILayout.Button( gc_DrawAngles, toggleStyle, GUILayout.MinWidth(BUTTON_SIZE)))
 			SetDrawAngles(!drawAngles);
 
+<<<<<<< HEAD
+=======
+		#if PRO
+		GUI.enabled = drawAngles;
+		#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 			
 			GUILayout.Label("Angle");
 
@@ -227,6 +303,12 @@ public class pg_Editor : EditorWindow
 			if(EditorGUI.EndChangeCheck()) {
 				SceneView.RepaintAll();
 			}
+<<<<<<< HEAD
+=======
+		#if PRO
+		GUI.enabled = true;
+		#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 
 		GUILayout.Label("Snap");
 		t_snapValue = EditorGUILayout.FloatField("", t_snapValue,
@@ -444,6 +526,34 @@ public class pg_Editor : EditorWindow
 				end + (i * (-cam.transform.up * _snapVal)) );
 		}
 
+<<<<<<< HEAD
+=======
+		#if PRO
+		if(drawAngles)
+		{
+			Vector3 cen = SnapValue(((topRight + bottomLeft) / 2f));
+
+			float half = (width > height) ? width : height;
+
+			float opposite = Mathf.Tan( Mathf.Deg2Rad*angleValue ) * half;
+
+			Vector3 up = cam.transform.up * opposite;
+			Vector3 right = cam.transform.right * half;
+
+			Vector3 bottomLeftAngle 	= cen - (up+right);
+			Vector3 topRightAngle 		= cen + (up+right);
+
+			Vector3 bottomRightAngle	= cen + (right-up);
+			Vector3 topLeftAngle 		= cen + (up-right);
+
+			// y = 1x+1
+			Handles.DrawLine(bottomLeftAngle, topRightAngle);
+
+			// y = -1x-1
+			Handles.DrawLine(topLeftAngle, bottomRightAngle);	
+		}
+		#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 
 		Handles.color = previousColor;
 	}
@@ -645,7 +755,17 @@ public class pg_Editor : EditorWindow
 
 	public void SetSnapValue(SnapUnit su, float val)
 	{
+<<<<<<< HEAD
 		Debug.LogWarning("Ye ought not be seein' this ye scurvy pirate.");
+=======
+		#if PRO
+		snapValue = SnapUnitValue(su) * val;
+		SceneView.RepaintAll();
+		SetSharedSnapValues(snapEnabled, snapValue);
+		#else
+		Debug.LogWarning("Ye ought not be seein' this ye scurvy pirate.");
+		#endif
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
 	}
 
 	public void SetGridEnabled(bool enable)
@@ -669,4 +789,8 @@ public class pg_Editor : EditorWindow
 		SixBySeven.Shared.snapValue = snapVal;
 	}
 #endregion
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 78da534d61cb4953093e8b4f2d10ec6833a107a8
