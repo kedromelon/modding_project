@@ -1,2 +1,7 @@
 Temp
 Library
+*.pidb
+*.userprefs
+*.DS_Store
+*.csproj
+*.sln
