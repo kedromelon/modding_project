@@ -34,7 +34,9 @@ public class Bcontroller : MonoBehaviour {
 		
 		if ( Physics.Raycast( transform.position, -transform.up, 1f ) == true ) {
             grounded = true;
-			jumpVector += Vector3.up * Input.GetAxis("Jump 2");
+			if (Input.GetButtonDown("Jump 2")){
+				jumpVector += Vector3.up * Input.GetAxis("Jump 2");
+			}
         } else {
             grounded = false;
         }

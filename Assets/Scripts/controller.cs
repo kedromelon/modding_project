@@ -10,6 +10,7 @@ public class controller : MonoBehaviour {
 	public float jumpSpeed = 100f;
 	public float fallSpeed = 6f;
 	bool grounded = false;
+	bool dash = true;
 	
 	// Use this for initialization
 	void Start () {
@@ -34,7 +35,9 @@ public class controller : MonoBehaviour {
 		
 		if ( Physics.Raycast( transform.position, -transform.up, 1f ) == true ) {
             grounded = true;
-			jumpVector += Vector3.up * Input.GetAxis("Jump 1");
+			if (Input.GetButtonDown("Jump 1")){
+				jumpVector += Vector3.up * Input.GetAxis("Jump 1");
+			}
         } else {
             grounded = false;
         }
