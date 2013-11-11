@@ -34,11 +34,12 @@ public class controller : MonoBehaviour {
 		
 		if ( Physics.Raycast( transform.position, -transform.up, 1f ) == true ) {
             grounded = true;
-			jumpVector += Vector3.up * Input.GetAxis("Jump 1");
+			if (Input.GetButtonDown("Jump 1")){
+				jumpVector += Vector3.up * Input.GetAxis("Jump 1");
+			}
         } else {
             grounded = false;
         }
-		
 		
 	}
 	
@@ -54,5 +55,7 @@ public class controller : MonoBehaviour {
 		}else{
 			rigidbody.AddForce( Physics.gravity * fallSpeed, ForceMode.Acceleration );
 		}
+		
 	}
+
 }
