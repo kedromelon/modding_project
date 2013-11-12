@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bcontroller : MonoBehaviour {
+public class P2Controller : MonoBehaviour {
 	
 	Vector3 inputVector;
 	Vector3 jumpVector;
@@ -40,8 +40,6 @@ public class Bcontroller : MonoBehaviour {
         } else {
             grounded = false;
         }
-		
-		
 	}
 	
 	void FixedUpdate() {
