@@ -9,7 +9,7 @@ public class player1dash : MonoBehaviour {
 	
 	void Update(){
 		
-		GetComponent<controller>().enabled = true;
+		GetComponent<P1Controller>().enabled = true;
 		
 		if (dash) {
 			
@@ -18,7 +18,7 @@ public class player1dash : MonoBehaviour {
 		}else{
 			
 			// disable controller if mid-dash
-			GetComponent<controller>().enabled = false;
+			GetComponent<P1Controller>().enabled = false;
 			
 		}
 		

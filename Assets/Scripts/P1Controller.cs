@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class controller : MonoBehaviour {
+public class P1Controller : MonoBehaviour {
 	
 	Vector3 inputVector;
 	Vector3 jumpVector;
@@ -40,7 +40,6 @@ public class controller : MonoBehaviour {
         } else {
             grounded = false;
         }
-		
 	}
 	
 	void FixedUpdate() {
@@ -55,7 +54,5 @@ public class controller : MonoBehaviour {
 		}else{
 			rigidbody.AddForce( Physics.gravity * fallSpeed, ForceMode.Acceleration );
 		}
-		
 	}
-
 }
