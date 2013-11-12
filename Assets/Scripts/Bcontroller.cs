@@ -32,7 +32,7 @@ public class Bcontroller : MonoBehaviour {
         	transform.rotation = rotation;
 		}
 		
-		if ( Physics.Raycast( transform.position, -transform.up, 1f ) == true ) {
+		if ( Physics.Raycast( transform.position, -transform.up, 1.5f ) == true ) {
             grounded = true;
 			jumpVector += Vector3.up * Input.GetAxis("Jump 2");
         } else {
