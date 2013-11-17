@@ -8,6 +8,7 @@ public class dash : MonoBehaviour {
 	public float dashLength = 0.05f;
 	Transform ball;
 	Vector3 ballDirection;
+	public float cooldown = 2f;
 
 	void Start(){
 
@@ -22,26 +23,29 @@ public class dash : MonoBehaviour {
 
 		if (candash) {
 
-			GetComponent<player>().enabled = true;
-
+			//GetComponent<player>().enabled = true;
+		
 			if (GetComponent<player>().dodash) 
 				StartCoroutine("Dash");
 			
 		}else{
 
 			// disable controller if mid-dash
-			GetComponent<player>().enabled = false;
+			//GetComponent<player>().enabled = false;
 			
 		}
 		
 	}
 	
 	IEnumerator Dash(){
+		GetComponent<player>().enabled = false;
 		rigidbody.velocity = Vector3.zero;
 		candash = false;
 		rigidbody.AddForce(ballDirection * dashSpeed, ForceMode.VelocityChange);
 		yield return new WaitForSeconds(dashLength);
 		rigidbody.AddForce( -rigidbody.velocity*dashSpeed/2, ForceMode.Acceleration );
+		GetComponent<player>().enabled = true;
+		yield return new WaitForSeconds(cooldown);	
 		candash = true;
 	}
 }
