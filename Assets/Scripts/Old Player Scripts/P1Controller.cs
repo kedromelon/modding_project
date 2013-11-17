@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class P1Controller : MonoBehaviour {
-	
+
 	Vector3 inputVector;
 	Vector3 jumpVector;
 	public Transform mainCamera;

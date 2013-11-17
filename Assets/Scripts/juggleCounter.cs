@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScorecounterGUI : MonoBehaviour {
+public class juggleCounter : MonoBehaviour {
+
+	public ballkickup ball;
+	public TextMesh counter;
 
 	// Use this for initialization
 	void Start () {
@@ -10,6 +13,8 @@ public class ScorecounterGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		counter.text = ball.juggleCounter.ToString();
 	
 	}
 }
