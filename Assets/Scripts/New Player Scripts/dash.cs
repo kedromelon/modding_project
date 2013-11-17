@@ -6,8 +6,19 @@ public class dash : MonoBehaviour {
 	bool candash = true;
 	public float dashSpeed = 50f;
 	public float dashLength = 0.05f;
+	Transform ball;
+	Vector3 ballDirection;
+
+	void Start(){
+
+		ball = GameObject.Find("ball").transform;
+
+	}
 	
 	void Update(){
+
+		ballDirection = ball.position - transform.position;
+		ballDirection = ballDirection.normalized;
 
 		if (candash) {
 
@@ -28,7 +39,7 @@ public class dash : MonoBehaviour {
 	IEnumerator Dash(){
 		rigidbody.velocity = Vector3.zero;
 		candash = false;
-		rigidbody.AddForce(transform.forward * dashSpeed, ForceMode.VelocityChange);
+		rigidbody.AddForce(ballDirection * dashSpeed, ForceMode.VelocityChange);
 		yield return new WaitForSeconds(dashLength);
 		rigidbody.AddForce( -rigidbody.velocity*dashSpeed/2, ForceMode.Acceleration );
 		candash = true;
