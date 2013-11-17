@@ -56,7 +56,7 @@ public class player : MonoBehaviour {
 	
 	void FixedUpdate() {
 		if (inputVector != Vector3.zero) {
-			rigidbody.AddForce( transform.forward * speed, ForceMode.VelocityChange );
+			rigidbody.AddForce( inputVector * speed, ForceMode.VelocityChange );
 		} else {
 			rigidbody.AddForce( -rigidbody.velocity, ForceMode.Acceleration );
 		}
