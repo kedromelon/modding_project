@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using InControl;
 
@@ -41,6 +41,8 @@ public class titlescreen : MonoBehaviour {
 			if (InputManager.ActiveDevice.Action1.WasPressed) Application.LoadLevel(1);
 
 		}
+
+		if (Input.GetKeyDown(KeyCode.Space)) Application.LoadLevel(1);
 
 
 
