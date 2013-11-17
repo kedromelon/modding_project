@@ -34,10 +34,8 @@ public class player : MonoBehaviour {
 		inputVector += mainCamera.transform.TransformDirection(
 			new Vector3(controller.LeftStickX, 0f, controller.LeftStickY));
 		
-		inputVector = Vector3.Scale (new Vector3(1f, 0f, 1f), inputVector);
-		
 		if (inputVector != Vector3.zero) {
-			Quaternion rotation = Quaternion.LookRotation(inputVector.normalized);
+			Quaternion rotation = Quaternion.LookRotation(Vector3.Scale (new Vector3(1f, 0f, 1f), inputVector));
 			transform.rotation = rotation;
 		}
 		
@@ -56,7 +54,7 @@ public class player : MonoBehaviour {
 	
 	void FixedUpdate() {
 		if (inputVector != Vector3.zero) {
-			rigidbody.AddForce( inputVector * speed, ForceMode.VelocityChange );
+			rigidbody.AddForce( transform.forward * inputVector.magnitude * speed, ForceMode.VelocityChange );
 		} else {
 			rigidbody.AddForce( -rigidbody.velocity, ForceMode.Acceleration );
 		}
