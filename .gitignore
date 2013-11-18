@@ -1,6 +1,5 @@
 Temp
 Library
-6by7
 *.pidb
 *.userprefs
 *.DS_Store
@@ -8,3 +7,5 @@ Library
 *.sln
 6by7
 6by7.meta
+SceneMate
+Assets/SceneMate.meta
