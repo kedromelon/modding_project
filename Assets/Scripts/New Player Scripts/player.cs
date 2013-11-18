@@ -17,7 +17,7 @@ public class player : MonoBehaviour {
 	public bool dodash = false;
 
 	bool grounded = false;
-	
+
 	// Use this for initialization
 	void Start () {
 
@@ -43,12 +43,15 @@ public class player : MonoBehaviour {
 			grounded = true;
 			if (controller.Action1.WasPressed){
 				jumpVector += Vector3.up;
+				rigidbody.velocity += jumpVector * jumpSpeed;
 			}
 		} else {
 			grounded = false;
 		}
 
 		dodash = controller.Action2.WasPressed;
+
+		if (!grounded) inputVector *= .3f;
 
 	}
 	
@@ -59,8 +62,8 @@ public class player : MonoBehaviour {
 			rigidbody.AddForce( -rigidbody.velocity, ForceMode.Acceleration );
 		}
 		
-		if (grounded == true){
-			rigidbody.AddForce (jumpVector * jumpSpeed, ForceMode.VelocityChange);
+		if (grounded){
+			//rigidbody.AddForce( jumpVector * jumpSpeed, ForceMode.Impulse);
 		}else{
 			rigidbody.AddForce( Physics.gravity * fallSpeed, ForceMode.Acceleration );
 		}

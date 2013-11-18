@@ -10,7 +10,6 @@ public class kickplayer: MonoBehaviour {
 			collision.rigidbody.velocity = Vector3.zero;
 			collision.rigidbody.AddForce(rigidbody.velocity * hitForce);
 			rigidbody.velocity = Vector3.zero;
-			Debug.Log("HIT");
 		}
 	}
 }
