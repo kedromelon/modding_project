@@ -18,21 +18,29 @@ public class player : MonoBehaviour {
 
 	bool grounded = false;
 
-	// Use this for initialization
-	void Start () {
-
-	}
+	float horizontal;
+	float vertical;
+	bool jump;
+	bool dash;
 	
 	// Update is called once per frame
 	void Update () {
 	
 		controller = updateInputManager.playerControllers[playerNum];
+		if (controller != null){
+			horizontal = controller.LeftStickX;
+			vertical = controller.LeftStickY;
+			jump = controller.Action1.WasPressed;
+			dash = controller.Action2.WasPressed;
+		}else{
+			getKeyboardInput();
+		}
 		
 		inputVector = Vector3.zero;
 		jumpVector = Vector3.zero;
 		
 		inputVector += mainCamera.transform.TransformDirection(
-			new Vector3(controller.LeftStickX, 0f, controller.LeftStickY));
+			new Vector3(horizontal, 0f, vertical));
 		
 		if (inputVector != Vector3.zero) {
 			Quaternion rotation = Quaternion.LookRotation(Vector3.Scale (new Vector3(1f, 0f, 1f), inputVector));
@@ -41,7 +49,7 @@ public class player : MonoBehaviour {
 		
 		if ( Physics.Raycast( transform.position, -transform.up, 1f ) == true ) {
 			grounded = true;
-			if (controller.Action1.WasPressed){
+			if (jump){
 				jumpVector += Vector3.up;
 				rigidbody.velocity += jumpVector * jumpSpeed;
 			}
@@ -49,7 +57,7 @@ public class player : MonoBehaviour {
 			grounded = false;
 		}
 
-		dodash = controller.Action2.WasPressed;
+		dodash = dash;
 
 		if (!grounded) inputVector *= .3f;
 
@@ -66,6 +74,105 @@ public class player : MonoBehaviour {
 			//rigidbody.AddForce( jumpVector * jumpSpeed, ForceMode.Impulse);
 		}else{
 			rigidbody.AddForce( Physics.gravity * fallSpeed, ForceMode.Acceleration );
+		}
+	}
+
+	void getKeyboardInput(){
+
+		bool up, down, left, right;
+
+		if(playerNum == 0){
+
+			up = Input.GetKey(KeyCode.W);
+			down = Input.GetKey(KeyCode.S);
+			left = Input.GetKey(KeyCode.A);
+			right = Input.GetKey(KeyCode.D);
+
+			horizontal = 0;
+			vertical = 0;
+
+			if (up){
+				vertical++;
+			}if (down){
+				vertical--;
+			}if (left){
+				horizontal--;
+			}if (right){
+				horizontal++;
+			}
+
+			jump = Input.GetKeyDown(KeyCode.Q);
+			dash = Input.GetKeyDown(KeyCode.E);
+
+		}else if(playerNum == 1){
+
+			up = Input.GetKey(KeyCode.T);
+			down = Input.GetKey(KeyCode.G);
+			left = Input.GetKey(KeyCode.F);
+			right = Input.GetKey(KeyCode.H);
+			
+			horizontal = 0;
+			vertical = 0;
+			
+			if (up){
+				vertical++;
+			}if (down){
+				vertical--;
+			}if (left){
+				horizontal--;
+			}if (right){
+				horizontal++;
+			}
+			
+			jump = Input.GetKeyDown(KeyCode.R);
+			dash = Input.GetKeyDown(KeyCode.Y);
+
+		}else if(playerNum == 2){
+
+			up = Input.GetKey(KeyCode.I);
+			down = Input.GetKey(KeyCode.K);
+			left = Input.GetKey(KeyCode.J);
+			right = Input.GetKey(KeyCode.L);
+			
+			horizontal = 0;
+			vertical = 0;
+			
+			if (up){
+				vertical++;
+			}if (down){
+				vertical--;
+			}if (left){
+				horizontal--;
+			}if (right){
+				horizontal++;
+			}
+			
+			jump = Input.GetKeyDown(KeyCode.U);
+			dash = Input.GetKeyDown(KeyCode.O);
+
+		}else if(playerNum == 3){
+
+			up = Input.GetKey(KeyCode.LeftBracket);
+			down = Input.GetKey(KeyCode.Quote);
+			left = Input.GetKey(KeyCode.Semicolon);
+			right = Input.GetKey(KeyCode.Return);
+			
+			horizontal = 0;
+			vertical = 0;
+			
+			if (up){
+				vertical++;
+			}if (down){
+				vertical--;
+			}if (left){
+				horizontal--;
+			}if (right){
+				horizontal++;
+			}
+			
+			jump = Input.GetKeyDown(KeyCode.P);
+			dash = Input.GetKeyDown(KeyCode.RightBracket);
+
 		}
 	}
 }
