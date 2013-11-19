@@ -7,7 +7,7 @@ public class ballkickup : MonoBehaviour {
 	public int juggleCounter = 0;
 	
 	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.name == "player 1" || collision.gameObject.name == "player 2"){
+		if (collision.gameObject.name == "player"){
 			rigidbody.AddForce(Vector3.up * hitForce);
 			juggleCounter ++;
 		}

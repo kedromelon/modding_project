@@ -5,7 +5,7 @@ public class maxvelocity: MonoBehaviour {
 
 	public float limit = 300f;
 
-	void FixedUpdate () {
+	void Update () {
 	
 		Vector3 currentVelocity = rigidbody.velocity;
 
