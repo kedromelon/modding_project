@@ -7,6 +7,8 @@ public class noahballkick : MonoBehaviour {
 	public float hitForce = 2f;
 	public float juggleForce = 2f;
 	public int juggleCounter = 0;
+    public Vector3 ballLocation;
+    public 
 	
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.name == "player"){
@@ -25,4 +27,9 @@ public class noahballkick : MonoBehaviour {
 		}
 		
 	}
+
+    void Update()
+    {
+        ballLocation = transform.position;
+    }
 }
