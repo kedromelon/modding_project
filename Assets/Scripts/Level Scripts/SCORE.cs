@@ -4,7 +4,8 @@ using System.Collections;
 public class SCORE : MonoBehaviour {
 
     public noahballkick obj;
-
+    int scoreR = 0;
+    int scoreB = 0;
 	// Use this for initialization
 	void Start () {
 	
@@ -18,7 +19,10 @@ public class SCORE : MonoBehaviour {
     //Scoring
     void OnTriggerEnter()
     {
-        
+
+        scoreR += obj.juggleCounter;
+
+        scoreB += obj.juggleCounter;
     }
 
 }

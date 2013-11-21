@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RingController : MonoBehaviour {
 
-    public Transform ball;
+    public Transform ballLocation;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +13,6 @@ public class RingController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        transform.LookAt(ball);
+        transform.LookAt(ballLocation);
 	}
 }

@@ -12,8 +12,8 @@ public class ballreturn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (transform.position.y < -2f || transform.position.x < -25f || transform.position.x > 25f ||
-            transform.position.z < -25f || transform.position.z > 25f)
+        if (transform.position.y < -2f || transform.position.x < -50f || transform.position.x > 50f ||
+            transform.position.z < -50f || transform.position.z > 50f)
         {
             transform.position = new Vector3(-5f, 1.5f, 0f);
             rigidbody.velocity = Vector3.zero;
