@@ -16,6 +16,7 @@ public class player : MonoBehaviour {
 	public InputDevice controller;
 	public bool dodash = false;
 	public bool dogoaldash = false;
+	public bool doplayerdash = false;
 
 
 	bool grounded = false;
@@ -25,6 +26,7 @@ public class player : MonoBehaviour {
 	bool jump;
 	bool dash;
 	bool goaldash;
+	bool playerdash;
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,6 +38,7 @@ public class player : MonoBehaviour {
 			jump = controller.Action1.WasPressed;
 			dash = controller.Action2.WasPressed;
 			goaldash = controller.Action3.WasPressed;
+			playerdash = controller.Action4.WasPressed;
 		}else{
 			getKeyboardInput();
 		}
@@ -63,6 +66,7 @@ public class player : MonoBehaviour {
 
 		dodash = dash;
 		dogoaldash = goaldash;
+		doplayerdash = playerdash;
 
 		if (!grounded) inputVector *= .3f;
 
@@ -109,6 +113,7 @@ public class player : MonoBehaviour {
 			jump = Input.GetKeyDown(KeyCode.Q);
 			dash = Input.GetKeyDown(KeyCode.E);
 			goaldash = Input.GetKeyDown(KeyCode.Z);
+			playerdash = Input.GetKeyDown(KeyCode.X);
 
 		}else if(playerNum == 1){
 
@@ -133,6 +138,7 @@ public class player : MonoBehaviour {
 			jump = Input.GetKeyDown(KeyCode.R);
 			dash = Input.GetKeyDown(KeyCode.Y);
 			goaldash = Input.GetKeyDown(KeyCode.V);
+			playerdash = Input.GetKeyDown(KeyCode.B);
 
 		}else if(playerNum == 2){
 
@@ -157,6 +163,7 @@ public class player : MonoBehaviour {
 			jump = Input.GetKeyDown(KeyCode.U);
 			dash = Input.GetKeyDown(KeyCode.O);
 			goaldash = Input.GetKeyDown(KeyCode.M);
+			playerdash = Input.GetKeyDown(KeyCode.Comma);
 
 		}else if(playerNum == 3){
 
@@ -181,6 +188,7 @@ public class player : MonoBehaviour {
 			jump = Input.GetKeyDown(KeyCode.P);
 			dash = Input.GetKeyDown(KeyCode.RightBracket);
 			goaldash = Input.GetKeyDown(KeyCode.Slash);
+			playerdash = Input.GetKeyDown(KeyCode.RightShift);
 
 		}
 	}
