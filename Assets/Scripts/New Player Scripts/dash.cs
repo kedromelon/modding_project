@@ -9,6 +9,7 @@ public class dash : MonoBehaviour {
 	Transform ball;
 	Vector3 ballDirection;
 	public float cooldown = 2f;
+	public Transform balldashIndicator;
 
 	public AudioClip dashSound;
 	private AudioSource playingSound = null;
@@ -23,6 +24,12 @@ public class dash : MonoBehaviour {
 
 		ballDirection = ball.position - transform.position;
 		ballDirection = ballDirection.normalized;
+
+		if(candash == false){
+			balldashIndicator.renderer.enabled = false;
+		}else{
+			balldashIndicator.renderer.enabled = true;
+		}
 		
 	}
 

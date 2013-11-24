@@ -9,6 +9,7 @@ public class dashatgoal : MonoBehaviour {
 	Transform goal;
 	Vector3 goalDirection;
 	public float cooldown = 2f;
+	public Transform goaldashIndicator;
 
 	public AudioClip dashSound;
 	private AudioSource playingSound = null;
@@ -23,6 +24,12 @@ public class dashatgoal : MonoBehaviour {
 
 		goalDirection = goal.position - transform.position;
 		goalDirection = goalDirection.normalized;
+
+		if(candash == false){
+			goaldashIndicator.renderer.enabled = false;
+		}else{
+			goaldashIndicator.renderer.enabled = true;
+		}
 		
 	}
 

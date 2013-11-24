@@ -8,6 +8,7 @@ public class dashatplayer : MonoBehaviour {
 	public float dashLength = 0.05f;
 	Vector3 otherplayerDirection;
 	public float cooldown = 2f;
+	public Transform playerdashIndicator;
 
 	public AudioClip dashSound;
 	private AudioSource playingSound = null;
@@ -19,6 +20,14 @@ public class dashatplayer : MonoBehaviour {
 			if (GetComponent<player>().doplayerdash) 
 				StartCoroutine("Dash");
 			
+		}
+	}
+
+	void Update(){
+		if(candash == false){
+			playerdashIndicator.renderer.enabled = false;
+		}else{
+			playerdashIndicator.renderer.enabled = true;
 		}
 	}
 	
