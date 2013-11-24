@@ -6,10 +6,12 @@ public class willGoalPaint : MonoBehaviour {
 	public Transform ball;
 	public TextMesh team1Score;
 	public TextMesh team2Score;
+	public TextMesh winCondition;
 	float team1scoreNum = 0f;
 	float team2scoreNum = 0f;
 	bool blueScore = false;
 	bool redScore = false;
+	public float winNumber = 25f;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +27,16 @@ public class willGoalPaint : MonoBehaviour {
 		}else if (redScore){
 			team2scoreNum = team2scoreNum + 1f * Time.deltaTime;
 			team2Score.text = team2scoreNum.ToString ();
+		}
+
+		if(team1scoreNum > winNumber){
+			team1Score.text = winNumber.ToString ();
+			winCondition.color = Color.blue;
+			winCondition.text = "TEAM 1 WINS!";
+		}else if(team2scoreNum > winNumber){
+			team2Score.text = winNumber.ToString ();
+			winCondition.color = Color.red;
+			winCondition.text = "TEAM 2 WINS!";
 		}
 		
 	}
