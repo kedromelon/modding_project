@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class controller : MonoBehaviour {
+public class P2Controller : MonoBehaviour {
 	
 	Vector3 inputVector;
 	Vector3 jumpVector;
@@ -23,7 +23,7 @@ public class controller : MonoBehaviour {
 		jumpVector = Vector3.zero;
 		
 		inputVector += mainCamera.transform.TransformDirection(
-			new Vector3(Input.GetAxis("Horizontal 1"),0, Input.GetAxis("Vertical 1")));
+			new Vector3(Input.GetAxis("Horizontal 2"),0, Input.GetAxis("Vertical 2")));
 		
 		inputVector = Vector3.Scale (new Vector3(1f, 0f, 1f), inputVector);
 		
@@ -34,12 +34,12 @@ public class controller : MonoBehaviour {
 		
 		if ( Physics.Raycast( transform.position, -transform.up, 1.5f ) == true ) {
             grounded = true;
-			jumpVector += Vector3.up * Input.GetAxis("Jump 1");
+			if (Input.GetButtonDown("Jump 2")){
+				jumpVector += Vector3.up * Input.GetAxis("Jump 2");
+			}
         } else {
             grounded = false;
         }
-		
-		
 	}
 	
 	void FixedUpdate() {
