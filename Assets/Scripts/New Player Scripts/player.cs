@@ -18,6 +18,10 @@ public class player : MonoBehaviour {
 	public bool dogoaldash = false;
 	public bool doplayerdash = false;
 
+	public AudioClip jumpSound;
+	public AudioClip bounceOffWall;
+	public AudioClip landing;
+	private AudioSource playingSound = null;
 
 	bool grounded = false;
 
@@ -27,6 +31,7 @@ public class player : MonoBehaviour {
 	bool dash;
 	bool goaldash;
 	bool playerdash;
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -37,8 +42,8 @@ public class player : MonoBehaviour {
 			vertical = controller.LeftStickY;
 			jump = controller.Action1.WasPressed;
 			dash = controller.Action2.WasPressed;
-			goaldash = controller.Action3.WasPressed;
-			playerdash = controller.Action4.WasPressed;
+			goaldash = controller.Action4.WasPressed;
+			playerdash = controller.Action3.WasPressed;
 		}else{
 			getKeyboardInput();
 		}
@@ -59,6 +64,7 @@ public class player : MonoBehaviour {
 			if (jump){
 				jumpVector += Vector3.up;
 				rigidbody.velocity += jumpVector * jumpSpeed;
+				playingSound = AudioManager.Instance.Play(jumpSound, this.transform, .4f);
 			}
 		} else {
 			grounded = false;
@@ -190,6 +196,15 @@ public class player : MonoBehaviour {
 			goaldash = Input.GetKeyDown(KeyCode.Slash);
 			playerdash = Input.GetKeyDown(KeyCode.RightShift);
 
+		}
+	}
+
+	void OnCollisionEnter(Collision collision){
+		if (collision.gameObject.name == "Walls"){
+			playingSound = AudioManager.Instance.Play(bounceOffWall, this.transform, .25f);
+		}
+		if (collision.gameObject.name == "DecagonArena"){
+			playingSound = AudioManager.Instance.Play(landing, this.transform, .1f);
 		}
 	}
 }

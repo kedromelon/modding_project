@@ -11,6 +11,9 @@ public class dashatgoal : MonoBehaviour {
 	public float cooldown = 2f;
 	public Transform goaldashIndicator;
 
+	public AudioClip dashSound;
+	private AudioSource playingSound = null;
+
 	void Start(){
 
 		goal = GameObject.Find("Goal").transform;
@@ -43,10 +46,14 @@ public class dashatgoal : MonoBehaviour {
 	
 	IEnumerator Dash(){
 
+
+
 		GetComponent<player>().enabled = false;
 		rigidbody.velocity = Vector3.zero;
 		candash = false;
 		rigidbody.AddForce(goalDirection * dashSpeed, ForceMode.VelocityChange);
+
+		playingSound = AudioManager.Instance.Play(dashSound, this.transform, .25f);
 
 		Quaternion rotation = Quaternion.LookRotation(Vector3.Scale (new Vector3(1f, 0f, 1f), goalDirection));
 		transform.rotation = rotation;
