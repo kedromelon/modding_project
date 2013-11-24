@@ -10,6 +10,9 @@ public class dash : MonoBehaviour {
 	Vector3 ballDirection;
 	public float cooldown = 2f;
 
+	public AudioClip dashSound;
+	private AudioSource playingSound = null;
+
 	void Start(){
 
 		ball = GameObject.Find("ball").transform;
@@ -36,10 +39,14 @@ public class dash : MonoBehaviour {
 	
 	IEnumerator Dash(){
 
+
+
 		GetComponent<player>().enabled = false;
 		rigidbody.velocity = Vector3.zero;
 		candash = false;
 		rigidbody.AddForce(ballDirection * dashSpeed, ForceMode.VelocityChange);
+
+		playingSound = AudioManager.Instance.Play(dashSound, this.transform, .25f);
 
 		Quaternion rotation = Quaternion.LookRotation(Vector3.Scale (new Vector3(1f, 0f, 1f), ballDirection));
 		transform.rotation = rotation;

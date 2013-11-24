@@ -9,6 +9,9 @@ public class dashatplayer : MonoBehaviour {
 	Vector3 otherplayerDirection;
 	public float cooldown = 2f;
 
+	public AudioClip dashSound;
+	private AudioSource playingSound = null;
+
 	void FixedUpdate(){
 		
 		if (candash) {
@@ -27,6 +30,8 @@ public class dashatplayer : MonoBehaviour {
 		rigidbody.velocity = Vector3.zero;
 		candash = false;
 		rigidbody.AddForce(otherplayerDirection * dashSpeed, ForceMode.VelocityChange);
+
+		playingSound = AudioManager.Instance.Play(dashSound, this.transform, .25f);
 		
 		Quaternion rotation = Quaternion.LookRotation(Vector3.Scale (new Vector3(1f, 0f, 1f), otherplayerDirection));
 		transform.rotation = rotation;
