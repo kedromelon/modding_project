@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class willGoalPaint : MonoBehaviour {
 
@@ -33,10 +34,14 @@ public class willGoalPaint : MonoBehaviour {
 			team1Score.text = winNumber.ToString ();
 			winCondition.color = Color.blue;
 			winCondition.text = "TEAM 1 WINS!";
+			if (Input.GetKeyDown(KeyCode.Space)) 
+				Application.LoadLevel(1);
 		}else if(team2scoreNum > winNumber){
 			team2Score.text = winNumber.ToString ();
 			winCondition.color = Color.red;
 			winCondition.text = "TEAM 2 WINS!";
+			if (Input.GetKeyDown(KeyCode.Space)) 
+				Application.LoadLevel(1);
 		}
 		
 	}
