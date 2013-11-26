@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class empty1Control : MonoBehaviour {
+public class emptyControl : MonoBehaviour {
 
-	public Transform player1;
+	Transform player;
 
 	// Use this for initialization
 	void Start () {
-	
+		player = transform.parent.Find("player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		transform.position = player1.position;
+		transform.position = player.position;
 	
 	}
 }
