@@ -8,8 +8,8 @@ public class willGoalPaint : MonoBehaviour {
 	public TextMesh team1Score;
 	public TextMesh team2Score;
 	public TextMesh winCondition;
-	float team1scoreNum = 0f;
-	float team2scoreNum = 0f;
+	public float team1scoreNum = 0f;
+	public float team2scoreNum = 0f;
 	bool blueScore = false;
 	bool redScore = false;
 	public float winNumber = 25f;
