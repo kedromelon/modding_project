@@ -53,9 +53,13 @@ public class willGoalPaint : MonoBehaviour {
 				transform.renderer.material.color = Color.blue;
 				blueScore = true;
 				redScore = false;
-			}else{
+			}else if(ball.renderer.material.color == Color.red){
 				transform.renderer.material.color = Color.red;
 				redScore = true;
+				blueScore = false;
+			}else{
+				transform.renderer.material = collision.transform.renderer.material;
+				redScore = false;
 				blueScore = false;
 			}
 		}
