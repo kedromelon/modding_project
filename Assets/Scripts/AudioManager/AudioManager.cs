@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
- 
+
+// based on Tumbleweed's AudioManager tutorial
+// http://dirigiballers.blogspot.com/2013/03/unity-c-audiomanager-tutorial-part-1.html
 public class AudioManager : Singleton<AudioManager> {
 	
 	class ClipInfo{
