@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GUITest : MonoBehaviour {
@@ -46,8 +46,8 @@ public class GUITest : MonoBehaviour {
 		//for this example, the bar display is linked to the current time,
 		//however you would set this value based on your desired display
 		//eg, the loading progress, the player's health, or whatever.
-		bar1Display = team1score.team1scoreNum / team1score.winNumber;
-		bar2Display = team2score.team2scoreNum / team2score.winNumber;
+		bar1Display = team1score.team1TimerNum / team1score.scoreNumber;
+		bar2Display = team2score.team2TimerNum / team2score.scoreNumber;
 		// barDisplay = MyControlScript.staticHealth;
 	}
 }
