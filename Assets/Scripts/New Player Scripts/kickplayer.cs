@@ -8,7 +8,8 @@ public class kickplayer: MonoBehaviour {
 	public AudioClip hitSound;
 	private AudioSource playingSound = null;
 	
-	void OnCollisionEnter(Collision collision) {
+    void OnCollisionEnter(Collision collision) {
+        //There's an issue with this if statement. There's a null reference exception to something in there
 		if (collision.gameObject.layer == 8 && rigidbody.velocity.magnitude > collision.rigidbody.velocity.magnitude){
 			playingSound = AudioManager.Instance.Play(hitSound, collision.transform.position, .2f);
 			collision.rigidbody.velocity = Vector3.zero;
@@ -17,5 +18,3 @@ public class kickplayer: MonoBehaviour {
 		}
 	}
 }
-
-
