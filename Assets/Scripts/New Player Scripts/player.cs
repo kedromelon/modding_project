@@ -32,10 +32,26 @@ public class player : MonoBehaviour {
 	bool goaldash;
 	bool playerdash;
 
+	float unlockMovement = 4.5f;
+
+	public TextMesh winText;
+
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+		if(Time.timeSinceLevelLoad < unlockMovement | winText.text == "TEAM 1 WINS!" | winText.text == "TEAM 2 WINS!"){
+			rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationZ;
+		}else{
+			rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+		}
+
+		/*if(winText.text == "TEAM 1 WINS!" | winText.text == "TEAM 2 WINS!"){
+			rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationZ;
+		}else{
+			rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+		}*/
+
 		controller = updateInputManager.playerControllers[playerNum];
 		if (controller != null){
 			horizontal = controller.LeftStickX;
