@@ -10,7 +10,6 @@ public class noahballkick : MonoBehaviour {
     public Vector3 ballLocation;
 	public AudioClip playerHit;
 	public AudioClip wallHit;
-	public AudioClip goalHit;
 	public AudioClip landing;
 	private AudioSource playingSound = null;
 	
@@ -37,10 +36,6 @@ public class noahballkick : MonoBehaviour {
 			playingSound = AudioManager.Instance.Play(wallHit, this.transform.position, .2f);
 		}
 
-		if (collision.gameObject.name == "Goal"){
-			playingSound = AudioManager.Instance.Play(goalHit, this.transform.position, .75f);
-		}
-		
 	}
 
     void Update()

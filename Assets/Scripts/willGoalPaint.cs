@@ -20,6 +20,7 @@ public class willGoalPaint : MonoBehaviour {
 	public float winNumber = 5f;
 	public Material neutralMaterial;
 
+	public AudioClip timerSound;
 	public AudioClip goalSound;
 	private AudioSource playingSound = null;
 
@@ -39,7 +40,7 @@ public class willGoalPaint : MonoBehaviour {
 			team1TimerNum = scoreNumber;
 			team1ScoreNum++;
 
-			playingSound = AudioManager.Instance.Play(goalSound, this.transform, .25f);
+			playingSound = AudioManager.Instance.Play(goalSound, this.transform, .6f);
 
 			transform.renderer.material = neutralMaterial;
 			redScore = false;
@@ -54,7 +55,7 @@ public class willGoalPaint : MonoBehaviour {
 			team2TimerNum = scoreNumber;
 			team2ScoreNum++;
 
-			playingSound = AudioManager.Instance.Play(goalSound, this.transform, .25f);
+			playingSound = AudioManager.Instance.Play(goalSound, this.transform, .6f);
 
 			transform.renderer.material = neutralMaterial;
 			redScore = false;
@@ -103,10 +104,15 @@ public class willGoalPaint : MonoBehaviour {
 
 		if(collision.gameObject.tag == "Ball"){
 			if(ball.renderer.material.color == Color.blue){
+				if (transform.renderer.material.color != Color.blue)
+					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
 				transform.renderer.material.color = Color.blue;
 				blueScore = true;
 				redScore = false;
+
 			}else if(ball.renderer.material.color == Color.red){
+				if (transform.renderer.material.color != Color.red)
+					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
 				transform.renderer.material.color = Color.red;
 				redScore = true;
 				blueScore = false;
@@ -115,6 +121,7 @@ public class willGoalPaint : MonoBehaviour {
 				redScore = false;
 				blueScore = false;
 			}
+
 		}
 
 	}
