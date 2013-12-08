@@ -112,108 +112,64 @@ public class player : MonoBehaviour {
 
 		bool up, down, left, right;
 
-		if(playerNum == 0){
-
-			up = Input.GetKey(KeyCode.W);
-			down = Input.GetKey(KeyCode.S);
-			left = Input.GetKey(KeyCode.A);
-			right = Input.GetKey(KeyCode.D);
-
-			horizontal = 0;
-			vertical = 0;
-
-			if (up){
-				vertical++;
-			}if (down){
-				vertical--;
-			}if (left){
-				horizontal--;
-			}if (right){
-				horizontal++;
-			}
-
-			jump = Input.GetKeyDown(KeyCode.Q);
-			dash = Input.GetKeyDown(KeyCode.E);
-			goaldash = Input.GetKeyDown(KeyCode.Z);
-			playerdash = Input.GetKeyDown(KeyCode.X);
-
-		}else if(playerNum == 1){
-
-			up = Input.GetKey(KeyCode.T);
-			down = Input.GetKey(KeyCode.G);
-			left = Input.GetKey(KeyCode.F);
-			right = Input.GetKey(KeyCode.H);
-			
-			horizontal = 0;
-			vertical = 0;
-			
-			if (up){
-				vertical++;
-			}if (down){
-				vertical--;
-			}if (left){
-				horizontal--;
-			}if (right){
-				horizontal++;
-			}
-			
-			jump = Input.GetKeyDown(KeyCode.R);
-			dash = Input.GetKeyDown(KeyCode.Y);
-			goaldash = Input.GetKeyDown(KeyCode.V);
-			playerdash = Input.GetKeyDown(KeyCode.B);
-
-		}else if(playerNum == 2){
-
-			up = Input.GetKey(KeyCode.I);
-			down = Input.GetKey(KeyCode.K);
-			left = Input.GetKey(KeyCode.J);
-			right = Input.GetKey(KeyCode.L);
-			
-			horizontal = 0;
-			vertical = 0;
-			
-			if (up){
-				vertical++;
-			}if (down){
-				vertical--;
-			}if (left){
-				horizontal--;
-			}if (right){
-				horizontal++;
-			}
-			
-			jump = Input.GetKeyDown(KeyCode.U);
-			dash = Input.GetKeyDown(KeyCode.O);
-			goaldash = Input.GetKeyDown(KeyCode.M);
-			playerdash = Input.GetKeyDown(KeyCode.Comma);
-
-		}else if(playerNum == 3){
-
-			up = Input.GetKey(KeyCode.LeftBracket);
-			down = Input.GetKey(KeyCode.Quote);
-			left = Input.GetKey(KeyCode.Semicolon);
-			right = Input.GetKey(KeyCode.Return);
-			
-			horizontal = 0;
-			vertical = 0;
-			
-			if (up){
-				vertical++;
-			}if (down){
-				vertical--;
-			}if (left){
-				horizontal--;
-			}if (right){
-				horizontal++;
-			}
-			
-			jump = Input.GetKeyDown(KeyCode.P);
-			dash = Input.GetKeyDown(KeyCode.RightBracket);
-			goaldash = Input.GetKeyDown(KeyCode.Slash);
-			playerdash = Input.GetKeyDown(KeyCode.RightShift);
-
+		switch (playerNum){
+			case 0:
+				up = Input.GetKey(KeyCode.W);
+				down = Input.GetKey(KeyCode.S);
+				left = Input.GetKey(KeyCode.A);
+				right = Input.GetKey(KeyCode.D);
+				jump = Input.GetKeyDown(KeyCode.Q);
+				dash = Input.GetKeyDown(KeyCode.E);
+				goaldash = Input.GetKeyDown(KeyCode.Z);
+				playerdash = Input.GetKeyDown(KeyCode.X);
+				break;
+			case 1:
+				up = Input.GetKey(KeyCode.T);
+				down = Input.GetKey(KeyCode.G);
+				left = Input.GetKey(KeyCode.F);
+				right = Input.GetKey(KeyCode.H);
+				jump = Input.GetKeyDown(KeyCode.R);
+				dash = Input.GetKeyDown(KeyCode.Y);
+				goaldash = Input.GetKeyDown(KeyCode.V);
+				playerdash = Input.GetKeyDown(KeyCode.B);
+				break;
+			case 2:
+				up = Input.GetKey(KeyCode.I);
+				down = Input.GetKey(KeyCode.K);
+				left = Input.GetKey(KeyCode.J);
+				right = Input.GetKey(KeyCode.L);
+				jump = Input.GetKeyDown(KeyCode.U);
+				dash = Input.GetKeyDown(KeyCode.O);
+				goaldash = Input.GetKeyDown(KeyCode.M);
+				playerdash = Input.GetKeyDown(KeyCode.Comma);
+				break;
+			case 3:
+				up = Input.GetKey(KeyCode.LeftBracket);
+				down = Input.GetKey(KeyCode.Quote);
+				left = Input.GetKey(KeyCode.Semicolon);
+				right = Input.GetKey(KeyCode.Return);
+				jump = Input.GetKeyDown(KeyCode.P);
+				dash = Input.GetKeyDown(KeyCode.RightBracket);
+				goaldash = Input.GetKeyDown(KeyCode.Slash);
+				playerdash = Input.GetKeyDown(KeyCode.RightShift);
+				break;
+			default:
+				up = false;
+				down = false;
+				left = false;
+				right = false;
+				break;
 		}
+
+		vertical = 0;
+		horizontal = 0;
+
+		if (up) vertical++;
+		if (down) vertical--;
+		if (left) horizontal--;
+		if (right) horizontal++;
 	}
+
 
 	void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.name == "Walls"){

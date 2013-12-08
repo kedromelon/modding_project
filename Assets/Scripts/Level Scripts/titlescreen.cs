@@ -36,7 +36,7 @@ public class titlescreen : MonoBehaviour {
 
 		}else{
 
-			instructions.SetActive(false);
+			instructions.GetComponent<TextMesh>().text = "PRESS 'A' TO START";
 
 			if (InputManager.ActiveDevice.Action1.WasPressed) Application.LoadLevel(1);
 
