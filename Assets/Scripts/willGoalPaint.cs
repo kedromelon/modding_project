@@ -20,6 +20,9 @@ public class willGoalPaint : MonoBehaviour {
 	public float winNumber = 5f;
 	public Material neutralMaterial;
 
+	public AudioClip goalSound;
+	private AudioSource playingSound = null;
+
 	// Update is called once per frame
 	void Update () {
 
@@ -36,6 +39,8 @@ public class willGoalPaint : MonoBehaviour {
 			team1TimerNum = scoreNumber;
 			team1ScoreNum++;
 
+			playingSound = AudioManager.Instance.Play(goalSound, this.transform, .25f);
+
 			transform.renderer.material = neutralMaterial;
 			redScore = false;
 			blueScore = false;
@@ -48,6 +53,8 @@ public class willGoalPaint : MonoBehaviour {
 		}else if(team2TimerNum > scoreNumber){
 			team2TimerNum = scoreNumber;
 			team2ScoreNum++;
+
+			playingSound = AudioManager.Instance.Play(goalSound, this.transform, .25f);
 
 			transform.renderer.material = neutralMaterial;
 			redScore = false;
