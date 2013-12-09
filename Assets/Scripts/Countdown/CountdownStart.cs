@@ -7,9 +7,12 @@ public class CountdownStart : MonoBehaviour {
 	public float lifetime = 1f;
 	public float birthtime = 4.5f;
 	public TextMesh start;
+	public GameObject music;
 	
 	// Use this for initialization
 	void Start () {
+
+		music = GameObject.Find("Music");
 		
 	}
 	
@@ -17,11 +20,14 @@ public class CountdownStart : MonoBehaviour {
 	void Update () {
 		if(Time.timeSinceLevelLoad > birthtime){
 			start.text = "Start!";
+
+			music.GetComponent<AudioSource>().enabled = true;
 			
 			transform.LookAt ( Camera.main.transform );
 			//transform.position += transform.forward *Time.deltaTime * speed;
 			
 			if(Time.timeSinceLevelLoad > birthtime + lifetime){
+
 				transform.position += -transform.forward * Time.deltaTime * speed;
 				transform.position += -transform.up * Time.deltaTime * speed/10f;
 				//Destroy (gameObject);

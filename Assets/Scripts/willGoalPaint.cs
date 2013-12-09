@@ -73,12 +73,14 @@ public class willGoalPaint : MonoBehaviour {
 			team1ScoreNum = winNumber;
 			winCondition.color = BLUE.color;
 			winCondition.text = "TEAM 1 WINS!";
+			Destroy(GameObject.Find("Music"));
 			if (Input.GetKeyDown(KeyCode.Space)) 
 				Application.LoadLevel(1);
 		}else if(team2ScoreNum >= winNumber){
 			team2ScoreNum = winNumber;
 			winCondition.color = RED.color;
 			winCondition.text = "TEAM 2 WINS!";
+			Destroy(GameObject.Find("Music"));
 			if (Input.GetKeyDown(KeyCode.Space)) 
 				Application.LoadLevel(1);
 		}

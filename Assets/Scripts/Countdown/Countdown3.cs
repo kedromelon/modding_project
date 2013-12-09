@@ -22,6 +22,7 @@ public class Countdown3 : MonoBehaviour {
 			transform.position += transform.forward *Time.deltaTime * speed;
 			
 			if(Time.timeSinceLevelLoad > birthtime + lifetime){
+				GameObject.Find("Beeps").GetComponent<AudioSource>().Play();
 				Destroy (gameObject);
 			}
 		}
