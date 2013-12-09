@@ -19,6 +19,8 @@ public class willGoalPaint : MonoBehaviour {
 	public float scoreNumber = 5f;
 	public float winNumber = 5f;
 	public Material neutralMaterial;
+	public Material BLUE;
+	public Material RED;
 
 	public AudioClip timerSound;
 	public AudioClip goalSound;
@@ -69,14 +71,16 @@ public class willGoalPaint : MonoBehaviour {
 
 		if(team1ScoreNum >= winNumber){
 			team1ScoreNum = winNumber;
-			winCondition.color = Color.blue;
+			winCondition.color = BLUE.color;
 			winCondition.text = "TEAM 1 WINS!";
+			Destroy(GameObject.Find("Music"));
 			if (Input.GetKeyDown(KeyCode.Space)) 
 				Application.LoadLevel(1);
 		}else if(team2ScoreNum >= winNumber){
 			team2ScoreNum = winNumber;
-			winCondition.color = Color.red;
+			winCondition.color = RED.color;
 			winCondition.text = "TEAM 2 WINS!";
+			Destroy(GameObject.Find("Music"));
 			if (Input.GetKeyDown(KeyCode.Space)) 
 				Application.LoadLevel(1);
 		}
@@ -103,17 +107,17 @@ public class willGoalPaint : MonoBehaviour {
 	void OnCollisionEnter(Collision collision){
 
 		if(collision.gameObject.tag == "Ball"){
-			if(ball.renderer.material.color == Color.blue){
-				if (transform.renderer.material.color != Color.blue)
+			if(ball.renderer.material.color == BLUE.color){
+				if (transform.renderer.material.color != BLUE.color)
 					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
-				transform.renderer.material.color = Color.blue;
+				transform.renderer.material.color = BLUE.color;
 				blueScore = true;
 				redScore = false;
 
-			}else if(ball.renderer.material.color == Color.red){
-				if (transform.renderer.material.color != Color.red)
+			}else if(ball.renderer.material.color == RED.color){
+				if (transform.renderer.material.color != RED.color)
 					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
-				transform.renderer.material.color = Color.red;
+				transform.renderer.material.color = RED.color;
 				redScore = true;
 				blueScore = false;
 			}else{
