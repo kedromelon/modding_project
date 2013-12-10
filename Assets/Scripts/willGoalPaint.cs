@@ -134,7 +134,7 @@ public class willGoalPaint : MonoBehaviour {
 				redScore = true;
 				blueScore = false;
 			}else{
-				transform.renderer.material = collision.transform.renderer.material;
+				transform.renderer.material = neutralMaterial;
 				redScore = false;
 				blueScore = false;
 			}
