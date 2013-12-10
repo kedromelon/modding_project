@@ -21,6 +21,7 @@ public class willGoalPaint : MonoBehaviour {
 	public Material neutralMaterial;
 	public Material BLUE;
 	public Material RED;
+	public ParticleSystem particle;
 
 	public AudioClip timerSound;
 	public AudioClip goalSound;
@@ -58,8 +59,8 @@ public class willGoalPaint : MonoBehaviour {
 
 			team1TimerNum = 0;
 
-
-
+			particle.Stop();
+			particle.Play();
 
 		}else if(team2TimerNum > scoreNumber){
 			team2TimerNum = scoreNumber;
@@ -72,6 +73,9 @@ public class willGoalPaint : MonoBehaviour {
 			blueScore = false;
 
 			team2TimerNum = 0;
+
+			particle.Stop();
+			particle.Play();
 
 
 
