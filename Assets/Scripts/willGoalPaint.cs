@@ -19,12 +19,15 @@ public class willGoalPaint : MonoBehaviour {
 	public float scoreNumber = 5f;
 	public float winNumber = 5f;
 	public Material neutralMaterial;
+	public Material BLUE;
+	public Material RED;
 
 	public AudioClip timerSound;
 	public AudioClip goalSound;
 	private AudioSource playingSound = null;
 
 	Vector3 baseCameraPosition;
+	public float screenShakeTimer = 0.5f;
 
 	// Update is called once per frame
 	void Update () {
@@ -71,14 +74,16 @@ public class willGoalPaint : MonoBehaviour {
 
 		if(team1ScoreNum >= winNumber){
 			team1ScoreNum = winNumber;
-			winCondition.color = Color.blue;
+			winCondition.color = BLUE.color;
 			winCondition.text = "TEAM 1 WINS!";
+			Destroy(GameObject.Find("Music"));
 			if (Input.GetKeyDown(KeyCode.Space)) 
 				Application.LoadLevel(1);
 		}else if(team2ScoreNum >= winNumber){
 			team2ScoreNum = winNumber;
-			winCondition.color = Color.red;
+			winCondition.color = RED.color;
 			winCondition.text = "TEAM 2 WINS!";
+			Destroy(GameObject.Find("Music"));
 			if (Input.GetKeyDown(KeyCode.Space)) 
 				Application.LoadLevel(1);
 		}
@@ -105,18 +110,18 @@ public class willGoalPaint : MonoBehaviour {
 	void OnCollisionEnter(Collision collision){
 
 		if(collision.gameObject.tag == "Ball"){
-			StartCoroutine(ScreenShake());
-			if(ball.renderer.material.color == Color.blue){
-				if (transform.renderer.material.color != Color.blue)
+			StartCoroutine(ScreenShake ());
+			if(ball.renderer.material.color == BLUE.color){
+				if (transform.renderer.material.color != BLUE.color)
 					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
-				transform.renderer.material.color = Color.blue;
+				transform.renderer.material.color = BLUE.color;
 				blueScore = true;
 				redScore = false;
 
-			}else if(ball.renderer.material.color == Color.red){
-				if (transform.renderer.material.color != Color.red)
+			}else if(ball.renderer.material.color == RED.color){
+				if (transform.renderer.material.color != RED.color)
 					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
-				transform.renderer.material.color = Color.red;
+				transform.renderer.material.color = RED.color;
 				redScore = true;
 				blueScore = false;
 			}else{
@@ -131,14 +136,14 @@ public class willGoalPaint : MonoBehaviour {
 
 	IEnumerator ScreenShake(){
 		
-		float t = 1;
+		float t = screenShakeTimer;
 		baseCameraPosition = Camera.main.transform.position;
 		while(t > 0f){
 			t -= Time.deltaTime;
 			Camera.main.transform.position = baseCameraPosition + t *
-				new Vector3(Mathf.Sin (Time.time * 10f), 
-				            Mathf.Sin (Time.time * 12.5f), 
-				            Mathf.Sin (Time.time *7f)); //you can format like this because it's only looking for the semicolon
+				new Vector3(Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f)); //you can format like this because it's only looking for the semicolon
 			yield return 0;
 		}
 		

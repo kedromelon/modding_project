@@ -8,6 +8,7 @@ public class kickplayer: MonoBehaviour {
 	public AudioClip hitSound;
 	private AudioSource playingSound = null;
 
+	public float screenShakeTime = 0.5f;
 	Vector3 baseCameraPosition;
 	
 	void OnCollisionEnter(Collision collision) {
@@ -22,7 +23,7 @@ public class kickplayer: MonoBehaviour {
 
 	IEnumerator ScreenShake(){
 		
-		float t = 1;
+		float t = screenShakeTime;
 		baseCameraPosition = Camera.main.transform.position;
 		while(t > 0f){
 			t -= Time.deltaTime;
