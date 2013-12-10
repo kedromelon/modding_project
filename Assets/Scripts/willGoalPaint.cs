@@ -24,6 +24,8 @@ public class willGoalPaint : MonoBehaviour {
 	public AudioClip goalSound;
 	private AudioSource playingSound = null;
 
+	Vector3 baseCameraPosition;
+
 	// Update is called once per frame
 	void Update () {
 
@@ -103,6 +105,7 @@ public class willGoalPaint : MonoBehaviour {
 	void OnCollisionEnter(Collision collision){
 
 		if(collision.gameObject.tag == "Ball"){
+			StartCoroutine(ScreenShake());
 			if(ball.renderer.material.color == Color.blue){
 				if (transform.renderer.material.color != Color.blue)
 					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
@@ -124,5 +127,20 @@ public class willGoalPaint : MonoBehaviour {
 
 		}
 
+	}
+
+	IEnumerator ScreenShake(){
+		
+		float t = 1;
+		baseCameraPosition = Camera.main.transform.position;
+		while(t > 0f){
+			t -= Time.deltaTime;
+			Camera.main.transform.position = baseCameraPosition + t *
+				new Vector3(Mathf.Sin (Time.time * 10f), 
+				            Mathf.Sin (Time.time * 12.5f), 
+				            Mathf.Sin (Time.time *7f)); //you can format like this because it's only looking for the semicolon
+			yield return 0;
+		}
+		
 	}
 }

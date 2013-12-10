@@ -7,6 +7,8 @@ public class kickplayer: MonoBehaviour {
 
 	public AudioClip hitSound;
 	private AudioSource playingSound = null;
+
+	Vector3 baseCameraPosition;
 	
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.layer == 8 && rigidbody.velocity.magnitude > collision.rigidbody.velocity.magnitude){
@@ -14,7 +16,23 @@ public class kickplayer: MonoBehaviour {
 			collision.rigidbody.velocity = Vector3.zero;
 			collision.rigidbody.AddForce(rigidbody.velocity * hitForce);
 			rigidbody.velocity = Vector3.zero;
+			StartCoroutine(ScreenShake ());
 		}
+	}
+
+	IEnumerator ScreenShake(){
+		
+		float t = 1;
+		baseCameraPosition = Camera.main.transform.position;
+		while(t > 0f){
+			t -= Time.deltaTime;
+			Camera.main.transform.position = baseCameraPosition + t *
+				new Vector3(Mathf.Sin (Time.time * 5f), 
+				            Mathf.Sin (Time.time * 5f), 
+				            Mathf.Sin (Time.time * 5f)); //you can format like this because it's only looking for the semicolon
+			yield return 0;
+		}
+		
 	}
 }
 
