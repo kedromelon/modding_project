@@ -15,11 +15,15 @@ public class noahballkick : MonoBehaviour {
 
 	public float screenShakeTime = 1f;
 	Vector3 baseCameraPosition;
+	Vector3 returnCameraPosition;
+
+	void Start(){
+		returnCameraPosition = Camera.main.transform.position;
+	}
 	
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.name == "player"){
 			if(collision.rigidbody.velocity.sqrMagnitude > 50f){
-				Debug.Log(collision.rigidbody.velocity.sqrMagnitude);
 				StartCoroutine(ScreenShake3(collision));
 			}
 			playingSound = AudioManager.Instance.Play(playerHit, this.transform.position, .5f);
@@ -67,7 +71,7 @@ public class noahballkick : MonoBehaviour {
 				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f)); //you can format like this because it's only looking for the semicolon
 			yield return 0;
 		}
-		
+		Camera.main.transform.position = returnCameraPosition;
 	}
 
 	IEnumerator ScreenShake2(){
@@ -82,6 +86,7 @@ public class noahballkick : MonoBehaviour {
 														 Mathf.Sin (Time.time *15f)); //you can format like this because it's only looking for the semicolon
 			yield return 0;
 		}
+		Camera.main.transform.position = returnCameraPosition;
 		
 	}
 
@@ -97,6 +102,7 @@ public class noahballkick : MonoBehaviour {
 				            Mathf.Sin (Time.time * collision.rigidbody.velocity.magnitude * 0.1f)); //you can format like this because it's only looking for the semicolon
 			yield return 0;
 		}
+		Camera.main.transform.position = returnCameraPosition;
 		
 	}
 }

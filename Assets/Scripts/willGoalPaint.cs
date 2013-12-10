@@ -27,7 +27,12 @@ public class willGoalPaint : MonoBehaviour {
 	private AudioSource playingSound = null;
 
 	Vector3 baseCameraPosition;
+	Vector3 returnCameraPosition;
 	public float screenShakeTimer = 0.5f;
+
+	void Start(){
+		returnCameraPosition = Camera.main.transform.position;
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -146,6 +151,6 @@ public class willGoalPaint : MonoBehaviour {
 				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f)); //you can format like this because it's only looking for the semicolon
 			yield return 0;
 		}
-		
+		Camera.main.transform.position = returnCameraPosition;
 	}
 }

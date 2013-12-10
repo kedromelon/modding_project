@@ -8,8 +8,13 @@ public class kickplayer: MonoBehaviour {
 	public AudioClip hitSound;
 	private AudioSource playingSound = null;
 
-	public float screenShakeTime = 0.5f;
+	public float screenShakeTime = 0.2f;
 	Vector3 baseCameraPosition;
+	Vector3 returnCameraPosition;
+
+	void Start(){
+		returnCameraPosition = Camera.main.transform.position;
+	}
 	
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.layer == 8 && rigidbody.velocity.magnitude > collision.rigidbody.velocity.magnitude){
@@ -31,8 +36,13 @@ public class kickplayer: MonoBehaviour {
 				new Vector3(Mathf.Sin (Time.time * 5f), 
 				            Mathf.Sin (Time.time * 5f), 
 				            Mathf.Sin (Time.time * 5f)); //you can format like this because it's only looking for the semicolon
+
 			yield return 0;
 		}
+		Camera.main.transform.position = returnCameraPosition;
+		Debug.Log(Camera.main.transform.position);
+		Debug.Log(baseCameraPosition);
+		Debug.Log(returnCameraPosition);
 		
 	}
 }
