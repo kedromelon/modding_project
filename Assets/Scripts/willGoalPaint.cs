@@ -10,6 +10,10 @@ public class willGoalPaint : MonoBehaviour {
 	public TextMesh team1Score;
 	public TextMesh team2Score;
 	public TextMesh winCondition;
+	public TextMesh instructions;
+	public TextMesh totalRedWins;
+	public TextMesh totalBlueWins;
+	public TextMesh winsTextStatic;
 	public float team1TimerNum = 0f;
 	public float team2TimerNum = 0f;
 	public float team1ScoreNum = 0f;
@@ -25,6 +29,9 @@ public class willGoalPaint : MonoBehaviour {
 	public ParticleSystem scoreParticle2;
 	public ParticleSystem hitParticle1;
 	public ParticleSystem hitParticle2;
+	static int RedWins = 0;
+	static int BlueWins = 0;
+	bool summed = false;
 	
 	public AudioClip timerSound;
 	public AudioClip goalSound;
@@ -88,15 +95,31 @@ public class willGoalPaint : MonoBehaviour {
 			team1ScoreNum = winNumber;
 			winCondition.color = BLUE.color;
 			winCondition.text = "TEAM 1 WINS!";
+			instructions.text = "Press 'A' to restart";
+			winsTextStatic.text = "WINS";
+			if(!summed){
+				BlueWins++;
+				totalBlueWins.text = BlueWins.ToString();
+				totalRedWins.text = RedWins.ToString();
+				summed = true;
+			}
 			Destroy(GameObject.Find("Music"));
-			if (Input.GetKeyDown(KeyCode.Space)) 
+			if (Input.GetKeyDown(KeyCode.Space) || InputManager.ActiveDevice.Action1.WasPressed) 
 				Application.LoadLevel(1);
 		}else if(team2ScoreNum >= winNumber){
 			team2ScoreNum = winNumber;
 			winCondition.color = RED.color;
 			winCondition.text = "TEAM 2 WINS!";
+			instructions.text = "Press 'A' to restart";
+			winsTextStatic.text = "WINS";
+			if(!summed){
+				RedWins++;
+				totalBlueWins.text = BlueWins.ToString();
+				totalRedWins.text = RedWins.ToString();
+				summed = true;
+			}
 			Destroy(GameObject.Find("Music"));
-			if (Input.GetKeyDown(KeyCode.Space)) 
+			if (Input.GetKeyDown(KeyCode.Space) || InputManager.ActiveDevice.Action1.WasPressed) 
 				Application.LoadLevel(1);
 		}
 
