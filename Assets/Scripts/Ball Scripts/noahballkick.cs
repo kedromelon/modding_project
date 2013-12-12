@@ -12,9 +12,20 @@ public class noahballkick : MonoBehaviour {
 	public AudioClip wallHit;
 	public AudioClip landing;
 	private AudioSource playingSound = null;
+
+	public float screenShakeTime = 1f;
+	Vector3 baseCameraPosition;
+	Vector3 returnCameraPosition;
+
+	void Start(){
+		returnCameraPosition = Camera.main.transform.position;
+	}
 	
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.name == "player"){
+			if(collision.rigidbody.velocity.sqrMagnitude > 50f){
+				StartCoroutine(ScreenShake3(collision));
+			}
 			playingSound = AudioManager.Instance.Play(playerHit, this.transform.position, .5f);
 			if (juggleCounter < 1)
 				rigidbody.AddForce(Vector3.up * initHitForce);
@@ -34,6 +45,11 @@ public class noahballkick : MonoBehaviour {
 
 		if (collision.gameObject.name == "Walls"){
 			playingSound = AudioManager.Instance.Play(wallHit, this.transform.position, .2f);
+			if(rigidbody.velocity.magnitude > 20f && rigidbody.velocity.magnitude < 100f){
+				StartCoroutine(ScreenShake ());
+			}else if(rigidbody.velocity.magnitude >= 100f){
+				StartCoroutine(ScreenShake2());
+			}
 		}
 
 	}
@@ -42,4 +58,51 @@ public class noahballkick : MonoBehaviour {
     {
         ballLocation = transform.position;
     }
+
+	IEnumerator ScreenShake(){
+		
+		float t = screenShakeTime;
+		baseCameraPosition = Camera.main.transform.position;
+		while(t > 0f){
+			t -= Time.deltaTime;
+			Camera.main.transform.position = baseCameraPosition + t *
+				new Vector3(Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f)); //you can format like this because it's only looking for the semicolon
+			yield return 0;
+		}
+		Camera.main.transform.position = returnCameraPosition;
+	}
+
+	IEnumerator ScreenShake2(){
+		
+		float t = screenShakeTime;
+		baseCameraPosition = Camera.main.transform.position;
+		while(t > 0f){
+			t -= Time.deltaTime;
+			Camera.main.transform.position = baseCameraPosition + t *
+											 new Vector3(Mathf.Sin (Time.time * 15f), 
+														 Mathf.Sin (Time.time * 15f), 
+														 Mathf.Sin (Time.time *15f)); //you can format like this because it's only looking for the semicolon
+			yield return 0;
+		}
+		Camera.main.transform.position = returnCameraPosition;
+		
+	}
+
+	IEnumerator ScreenShake3(Collision collision){
+		
+		float t = screenShakeTime;
+		baseCameraPosition = Camera.main.transform.position;
+		while(t > 0f){
+			t -= Time.deltaTime;
+			Camera.main.transform.position = baseCameraPosition + t *
+				new Vector3(Mathf.Sin (Time.time * collision.rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * collision.rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * collision.rigidbody.velocity.magnitude * 0.1f)); //you can format like this because it's only looking for the semicolon
+			yield return 0;
+		}
+		Camera.main.transform.position = returnCameraPosition;
+		
+	}
 }

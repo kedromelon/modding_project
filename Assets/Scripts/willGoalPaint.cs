@@ -21,10 +21,22 @@ public class willGoalPaint : MonoBehaviour {
 	public Material neutralMaterial;
 	public Material BLUE;
 	public Material RED;
-
+	public ParticleSystem scoreParticle1;
+	public ParticleSystem scoreParticle2;
+	public ParticleSystem hitParticle1;
+	public ParticleSystem hitParticle2;
+	
 	public AudioClip timerSound;
 	public AudioClip goalSound;
 	private AudioSource playingSound = null;
+
+	Vector3 baseCameraPosition;
+	Vector3 returnCameraPosition;
+	public float screenShakeTimer = 0.5f;
+
+	void Start(){
+		returnCameraPosition = Camera.main.transform.position;
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -50,8 +62,8 @@ public class willGoalPaint : MonoBehaviour {
 
 			team1TimerNum = 0;
 
-
-
+			scoreParticle1.Stop();
+			scoreParticle1.Play();
 
 		}else if(team2TimerNum > scoreNumber){
 			team2TimerNum = scoreNumber;
@@ -64,6 +76,9 @@ public class willGoalPaint : MonoBehaviour {
 			blueScore = false;
 
 			team2TimerNum = 0;
+
+			scoreParticle2.Stop();
+			scoreParticle2.Play();
 
 
 
@@ -107,26 +122,67 @@ public class willGoalPaint : MonoBehaviour {
 	void OnCollisionEnter(Collision collision){
 
 		if(collision.gameObject.tag == "Ball"){
+			StartCoroutine(ScreenShake ());
 			if(ball.renderer.material.color == BLUE.color){
-				if (transform.renderer.material.color != BLUE.color)
+				if (transform.renderer.material.color != BLUE.color){
 					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
+					//hitParticle1.Stop();
+					//hitParticle1.Play();
+				}
 				transform.renderer.material.color = BLUE.color;
 				blueScore = true;
 				redScore = false;
 
 			}else if(ball.renderer.material.color == RED.color){
-				if (transform.renderer.material.color != RED.color)
+				if (transform.renderer.material.color != RED.color){
 					playingSound = AudioManager.Instance.Play(timerSound, this.transform, .75f);
+					//hitParticle2.Stop();
+					//hitParticle2.Play();
+				}
 				transform.renderer.material.color = RED.color;
 				redScore = true;
 				blueScore = false;
 			}else{
-				transform.renderer.material = collision.transform.renderer.material;
+				transform.renderer.material = neutralMaterial;
 				redScore = false;
 				blueScore = false;
 			}
 
 		}
 
+		if(collision.gameObject.name == "player"){
+			StartCoroutine(ScreenShake2());
+		}
+
+	}
+
+	IEnumerator ScreenShake(){
+		
+		float t = screenShakeTimer;
+		baseCameraPosition = Camera.main.transform.position;
+		while(t > 0f){
+			t -= Time.deltaTime;
+			Camera.main.transform.position = baseCameraPosition + t *
+				new Vector3(Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f), 
+				            Mathf.Sin (Time.time * rigidbody.velocity.magnitude * 0.1f)); //you can format like this because it's only looking for the semicolon
+			yield return 0;
+		}
+		Camera.main.transform.position = returnCameraPosition;
+	}
+
+	IEnumerator ScreenShake2(){
+		
+		float t = screenShakeTimer;
+		baseCameraPosition = Camera.main.transform.position;
+		while(t > 0f){
+			t -= Time.deltaTime;
+			Camera.main.transform.position = baseCameraPosition + t *
+				new Vector3(Mathf.Sin (Time.time * 1f), 
+				            Mathf.Sin (Time.time * 1f), 
+				            Mathf.Sin (Time.time * 1f)); //you can format like this because it's only looking for the semicolon
+			yield return 0;
+		}
+		Camera.main.transform.position = returnCameraPosition;
 	}
 }
